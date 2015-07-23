@@ -1,0 +1,78 @@
+Deployment steps. 
+
+
+1.Open Unix. 
+2.Move the following packages in the /u01/oracle/apps/apps_st/appl/xxnbty/12.0.0/admin/sql using WINSCP and execute the command below in the UNIX.
+
+XXNBTY_MSCREP02_ONHAND_PKG.pks 
+XXNBTY_MSCREP02_ONHAND_PKG.pkb
+XXNBTY_MSCREP02_IN_TRANSIT_PKG.pks 
+XXNBTY_MSCREP02_IN_TRANSIT_PKG.pkb
+XXNBTY_MSCREP02_WORK_ORDER_PKG.pks 
+XXNBTY_MSCREP02_WORK_ORDER_PKG.pkb
+XXNBTY_MSCREP02_WIP_PKG.pks 
+XXNBTY_MSCREP02_WIP_PKG.pkb
+XXNBTY_MSCREP02_SALES_ORDR_PKG.pks 
+XXNBTY_MSCREP02_SALES_ORDR_PKG.pkb
+XXNBTY_MSCREP02_ITEM_COSTS_PKG.pks 
+XXNBTY_MSCREP02_ITEM_COSTS_PKG.pkb
+XXNBTY_VCP_SEND_EMAIL_PKG.pks
+XXNBTY_VCP_SEND_EMAIL_PKG.pkb
+
+
+
+
+sqlplus -s USERNAME/PASSWORD
+
+@/u01/oracle/apps/apps_st/appl/xxnbty/12.0.0/admin/sql/XXNBTY_MSCREP02_ONHAND_PKG.pks
+@/u01/oracle/apps/apps_st/appl/xxnbty/12.0.0/admin/sql/XXNBTY_MSCREP02_IN_TRANSIT_PKG.pks
+@/u01/oracle/apps/apps_st/appl/xxnbty/12.0.0/admin/sql/XXNBTY_MSCREP02_WORK_ORDER_PKG.pks
+@/u01/oracle/apps/apps_st/appl/xxnbty/12.0.0/admin/sql/XXNBTY_MSCREP02_WIP_PKG.pks
+@/u01/oracle/apps/apps_st/appl/xxnbty/12.0.0/admin/sql/XXNBTY_MSCREP02_SALES_ORDR_PKG.pks
+@/u01/oracle/apps/apps_st/appl/xxnbty/12.0.0/admin/sql/XXNBTY_MSCREP02_ITEM_COSTS_PKG.pks
+@/u01/oracle/apps/apps_st/appl/xxnbty/12.0.0/admin/sql/XXNBTY_VCP_SEND_EMAIL_PKG.pks
+
+
+@/u01/oracle/apps/apps_st/appl/xxnbty/12.0.0/admin/sql/XXNBTY_MSCREP02_ONHAND_PKG.pkb
+@/u01/oracle/apps/apps_st/appl/xxnbty/12.0.0/admin/sql/XXNBTY_MSCREP02_IN_TRANSIT_PKG.pkb
+@/u01/oracle/apps/apps_st/appl/xxnbty/12.0.0/admin/sql/XXNBTY_MSCREP02_WORK_ORDER_PKG.pkb
+@/u01/oracle/apps/apps_st/appl/xxnbty/12.0.0/admin/sql/XXNBTY_MSCREP02_WIP_PKG.pkb
+@/u01/oracle/apps/apps_st/appl/xxnbty/12.0.0/admin/sql/XXNBTY_MSCREP02_SALES_ORDR_PKG.pkb
+@/u01/oracle/apps/apps_st/appl/xxnbty/12.0.0/admin/sql/XXNBTY_MSCREP02_ITEM_COSTS_PKG.pkb
+@/u01/oracle/apps/apps_st/appl/xxnbty/12.0.0/admin/sql/XXNBTY_VCP_SEND_EMAIL_PKG.pkb
+
+
+
+3.Move the following LDT's below to /u01/oracle/apps/apps_st/appl/xxnbty/12.0.0/admin/import using WINSCP and execute the command below in the UNIX.
+
+XXNBTY_REP02_CP_a.ldt
+XXNBTY_REP02_CP_b.ldt
+XXNBTY_REP02_CP_c.ldt
+XXNBTY_REP02_CP_d.ldt
+XXNBTY_REP02_CP_e.ldt
+XXNBTY_REP02_CP_f.ldt
+XXNBTY_VCP_SEND_EMAIL_CP.ldt 
+
+
+NOTE: Please make sure to update the password.
+
+cd /u01/oracle/apps/apps_st/appl/xxnbty/12.0.0/admin/import
+
+
+FNDLOAD apps/PASSWORD 0 Y UPLOAD $FND_TOP/patch/115/import/afcpprog.lct XXNBTY_REP02_CP_a.ldt CUSTOM_MODE=FORCE
+FNDLOAD apps/PASSWORD 0 Y UPLOAD $FND_TOP/patch/115/import/afcpprog.lct XXNBTY_REP02_CP_b.ldt CUSTOM_MODE=FORCE
+FNDLOAD apps/PASSWORD 0 Y UPLOAD $FND_TOP/patch/115/import/afcpprog.lct XXNBTY_REP02_CP_c.ldt CUSTOM_MODE=FORCE
+FNDLOAD apps/PASSWORD 0 Y UPLOAD $FND_TOP/patch/115/import/afcpprog.lct XXNBTY_REP02_CP_d.ldt CUSTOM_MODE=FORCE
+FNDLOAD apps/PASSWORD 0 Y UPLOAD $FND_TOP/patch/115/import/afcpprog.lct XXNBTY_REP02_CP_e.ldt CUSTOM_MODE=FORCE
+FNDLOAD apps/PASSWORD 0 Y UPLOAD $FND_TOP/patch/115/import/afcpprog.lct XXNBTY_REP02_CP_f.ldt CUSTOM_MODE=FORCE
+FNDLOAD apps/PASSWORD 0 Y UPLOAD $FND_TOP/patch/115/import/afcpprog.lct XXNBTY_VCP_SEND_EMAIL_CP.ldt CUSTOM_MODE=FORCE
+
+
+4.Move XXNBTYVCPSENDEMAIL.prog to /u01/oracle/apps/apps_st/appl/xxnbty/12.0.0/bin and execute the following commands:
+
+cd /u01/oracle/apps/apps_st/appl/xxnbty/12.0.0/bin
+
+dos2unix XXNBTYVCPSENDEMAIL.prog
+chmod 777 XXNBTYVCPSENDEMAIL.prog
+
+
